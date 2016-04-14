@@ -15,7 +15,14 @@ namespace solab3
 
         public override void HandleRequest(int value)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < m_Frames.Size; ++i)
+                if (m_Frames[i].Value == value)
+                    return;
+
+            for (int i = 0; i < m_Frames.Size - 1; ++i)
+                m_Frames[i] = m_Frames[i + 1];
+
+            m_Frames[m_Frames.Size - 1] = new Frame(value);
         }
     }
 }
