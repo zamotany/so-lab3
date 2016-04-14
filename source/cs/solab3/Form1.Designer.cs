@@ -46,10 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.MaxFrameValNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.FramesListView = new System.Windows.Forms.ListView();
-            this.RequestsListView = new System.Windows.Forms.ListView();
-            this.labl9 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.console = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.frameNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RequestsNumericUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -100,7 +97,7 @@
             // 
             // beginButton
             // 
-            this.beginButton.Location = new System.Drawing.Point(348, 218);
+            this.beginButton.Location = new System.Drawing.Point(340, 187);
             this.beginButton.Name = "beginButton";
             this.beginButton.Size = new System.Drawing.Size(75, 23);
             this.beginButton.TabIndex = 4;
@@ -243,50 +240,21 @@
             0,
             0});
             // 
-            // FramesListView
+            // console
             // 
-            this.FramesListView.Location = new System.Drawing.Point(247, 66);
-            this.FramesListView.Name = "FramesListView";
-            this.FramesListView.Size = new System.Drawing.Size(82, 144);
-            this.FramesListView.TabIndex = 13;
-            this.FramesListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // RequestsListView
-            // 
-            this.RequestsListView.Location = new System.Drawing.Point(335, 66);
-            this.RequestsListView.Name = "RequestsListView";
-            this.RequestsListView.Size = new System.Drawing.Size(82, 144);
-            this.RequestsListView.TabIndex = 14;
-            this.RequestsListView.UseCompatibleStateImageBehavior = false;
-            this.RequestsListView.View = System.Windows.Forms.View.List;
-            // 
-            // labl9
-            // 
-            this.labl9.AutoSize = true;
-            this.labl9.Location = new System.Drawing.Point(247, 47);
-            this.labl9.Name = "labl9";
-            this.labl9.Size = new System.Drawing.Size(41, 13);
-            this.labl9.TabIndex = 15;
-            this.labl9.Text = "Frames";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(335, 47);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 13);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Requests";
+            this.console.Location = new System.Drawing.Point(15, 216);
+            this.console.Multiline = true;
+            this.console.Name = "console";
+            this.console.ReadOnly = true;
+            this.console.Size = new System.Drawing.Size(400, 129);
+            this.console.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 253);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.labl9);
-            this.Controls.Add(this.RequestsListView);
-            this.Controls.Add(this.FramesListView);
+            this.ClientSize = new System.Drawing.Size(427, 348);
+            this.Controls.Add(this.console);
             this.Controls.Add(this.MaxFrameValNumericUpDown);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
@@ -328,10 +296,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown MaxFrameValNumericUpDown;
-        private System.Windows.Forms.ListView FramesListView;
-        private System.Windows.Forms.ListView RequestsListView;
-        private System.Windows.Forms.Label labl9;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox console;
     }
 }
 
