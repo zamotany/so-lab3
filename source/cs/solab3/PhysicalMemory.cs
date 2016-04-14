@@ -13,6 +13,8 @@ namespace solab3
         public PhysicalMemory(int frames)
         {
             m_Frames = new List<Frame>(frames);
+            for (int i = 0; i < frames; i++)
+                m_Frames.Add(new Frame(-1));
         }
 
         public int Size

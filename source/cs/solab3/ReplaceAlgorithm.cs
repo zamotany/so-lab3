@@ -16,7 +16,7 @@ namespace solab3
         {
             m_Requests = reqs;
             m_PagesErrors = 0;
-            m_Frames = new PhysicalMemory(frames);
+            m_Frames = new PhysicalMemory(frames);  
         }
 
         public int PagesErrors
