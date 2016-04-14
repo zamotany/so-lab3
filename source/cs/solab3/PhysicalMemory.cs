@@ -8,17 +8,22 @@ namespace solab3
 {
     class PhysicalMemory
     {
-        private List<int> m_Frames;
-        private int m_Size;
+        private List<Frame> m_Frames;
 
         public PhysicalMemory(int frames)
         {
-            
+            m_Frames = new List<Frame>(frames);
         }
 
         public int Size
         {
-            get { return m_Size; }
+            get { return m_Frames.Count; }
+        }
+
+        public Frame this[int index]
+        {
+            get { return m_Frames[index]; }
+            set { m_Frames[index] = value; }
         }
     }
 }

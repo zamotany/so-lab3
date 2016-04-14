@@ -27,6 +27,12 @@ namespace solab3
             }
         }
 
+        public Frame this[int index]
+        {
+            get { return m_Frames[index]; }
+            set { m_Frames[index] = value; }
+        }
+
         public abstract void HandleRequest(int value);
     }
 }
