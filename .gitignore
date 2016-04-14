@@ -5,3 +5,6 @@
 *.sln
 *.csproj
 \obj\*
+*.suo
+*.exe
+*.pdb

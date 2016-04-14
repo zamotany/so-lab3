@@ -16,5 +16,24 @@ namespace solab3
         {
             InitializeComponent();
         }
+
+        private void beginButton_Click(object sender, EventArgs e)
+        {
+            beginButton.Enabled = false;
+            exec();
+            beginButton.Enabled = true;
+        }
+
+        private void exec()
+        {
+            List<int> requests = new List<int>((int)RequestsNumericUpDown.Value);
+            Random rand = new Random();
+            for (int i = 0; i < requests.Capacity; i++)
+            {
+                requests.Add(rand.Next(1, (int)MaxFrameValNumericUpDown.Value));
+                RequestsListView.Items.Add(requests[i].ToString());
+            }
+            //initialise frames for every algorithm
+        }
     }
 }
