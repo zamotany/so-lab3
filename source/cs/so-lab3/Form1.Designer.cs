@@ -246,14 +246,15 @@
             this.console.Multiline = true;
             this.console.Name = "console";
             this.console.ReadOnly = true;
-            this.console.Size = new System.Drawing.Size(400, 129);
+            this.console.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.console.Size = new System.Drawing.Size(408, 129);
             this.console.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(427, 348);
+            this.ClientSize = new System.Drawing.Size(430, 348);
             this.Controls.Add(this.console);
             this.Controls.Add(this.MaxFrameValNumericUpDown);
             this.Controls.Add(this.label8);
