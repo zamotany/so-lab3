@@ -46,7 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.MaxFrameValNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.console = new System.Windows.Forms.TextBox();
+            this.console = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.frameNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RequestsNumericUpDown)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -242,13 +242,14 @@
             // 
             // console
             // 
-            this.console.Location = new System.Drawing.Point(15, 216);
-            this.console.Multiline = true;
+            this.console.Location = new System.Drawing.Point(7, 216);
             this.console.Name = "console";
             this.console.ReadOnly = true;
-            this.console.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.console.Size = new System.Drawing.Size(408, 129);
+            this.console.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.console.Size = new System.Drawing.Size(416, 129);
             this.console.TabIndex = 13;
+            this.console.Text = "";
+            this.console.WordWrap = false;
             // 
             // Form1
             // 
@@ -297,7 +298,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown MaxFrameValNumericUpDown;
-        private System.Windows.Forms.TextBox console;
+        private System.Windows.Forms.RichTextBox console;
     }
 }
 
