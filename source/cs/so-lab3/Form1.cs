@@ -16,6 +16,7 @@ namespace solab3
         private FIFOAlgorithm m_FIFO;
         private LRUAlgorithm m_LRU;
         private A_LRUAlgorithm m_ALRU;
+        private RANDAlgorithm m_RAND;
 
         public Form1()
         {
@@ -45,8 +46,9 @@ namespace solab3
             m_FIFO = new FIFOAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
             m_LRU = new LRUAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
             m_ALRU = new A_LRUAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
+            m_RAND = new RANDAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
 
-            Random rand = new Random();
+            Random rand = new Random(Guid.NewGuid().GetHashCode());
 
             console.Text = "Requests: ";
             for (int i = 0; i < m_Requests.Capacity; i++)
@@ -62,6 +64,7 @@ namespace solab3
                 m_FIFO[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
                 m_LRU[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
                 m_ALRU[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
+                m_RAND[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
             }
 
         }
@@ -73,11 +76,13 @@ namespace solab3
                 m_FIFO.HandleRequest(m_Requests[i]);
                 m_LRU.HandleRequest(m_Requests[i]);
                 m_ALRU.HandleRequest(m_Requests[i]);
+                m_RAND.HandleRequest(m_Requests[i]);
                 m_Requests.RemoveAt(i);
                 FIFO_PagesErrors.Text = m_FIFO.PagesErrors.ToString();
                 LRU_PagesErrors.Text = m_LRU.PagesErrors.ToString();
                 ALRU_PagesErrors.Text = m_ALRU.PagesErrors.ToString();
-                console.Text += m_FIFO.ToString() + "\t" + m_LRU.ToString() + "\t" + m_ALRU.ToString() + "\r\n";
+                RAND_PagesErrors.Text = m_ALRU.PagesErrors.ToString();
+                console.Text += m_FIFO.ToString() + "\t" + m_LRU.ToString() + "\t" + m_ALRU.ToString() + "\t" + m_RAND.ToString() + "\r\n";
             }
             
         }
