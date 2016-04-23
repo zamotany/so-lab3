@@ -34,5 +34,7 @@ namespace solab3
         }
 
         public abstract void HandleRequest(int value);
+
+        public abstract string ToString();
     }
 }

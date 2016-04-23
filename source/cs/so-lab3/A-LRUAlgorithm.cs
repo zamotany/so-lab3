@@ -29,5 +29,13 @@ namespace solab3
 
             ++m_PagesErrors;
         }
+
+        public override string ToString()
+        {
+            string output = "A-LRU: ";
+            for (int k = 0; k < m_Frames.Size; k++)
+                output += m_Frames[k].Value.ToString() + ' ';
+            return output;
+        }
     }
 }
