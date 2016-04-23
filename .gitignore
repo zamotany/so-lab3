@@ -1,7 +1,0 @@
-*.vshost*
-*.config
-*.cache
-*.settings
-*.sln
-*.csproj
-\obj\*
