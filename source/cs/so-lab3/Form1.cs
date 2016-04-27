@@ -21,7 +21,9 @@ namespace solab3
         public Form1()
         {
             InitializeComponent();
-            RequestsNumericUpDown.Value = 1;
+            frameNumericUpDown.Value = 4;
+            MaxFrameValNumericUpDown.Value = 8;
+            RequestsNumericUpDown.Value = 8;
         }
 
         private void beginButton_Click(object sender, EventArgs e)
@@ -51,9 +53,10 @@ namespace solab3
             Random rand = new Random(Guid.NewGuid().GetHashCode());
 
             console.Text = "Requests: ";
+            int temp = 0;
             for (int i = 0; i < m_Requests.Capacity; i++)
             {
-                int temp = rand.Next(1, (int)MaxFrameValNumericUpDown.Value);
+                temp = rand.Next(1, (int)MaxFrameValNumericUpDown.Value);
                 m_Requests.Add(temp);
                 console.Text += temp.ToString() + ' ';
             }
@@ -71,7 +74,7 @@ namespace solab3
 
         private void exec()
         {
-            for (int i = 0; i < m_Requests.Count;)
+            for (int i = 0; i < m_Requests.Count; /*End condition handled by removing item at position i.*/)
             {
                 m_FIFO.HandleRequest(m_Requests[i]);
                 m_LRU.HandleRequest(m_Requests[i]);

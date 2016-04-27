@@ -56,6 +56,11 @@
             // frameNumericUpDown
             // 
             this.frameNumericUpDown.Location = new System.Drawing.Point(117, 7);
+            this.frameNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.frameNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
@@ -73,9 +78,24 @@
             // RequestsNumericUpDown
             // 
             this.RequestsNumericUpDown.Location = new System.Drawing.Point(117, 34);
+            this.RequestsNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.RequestsNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.RequestsNumericUpDown.Name = "RequestsNumericUpDown";
             this.RequestsNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.RequestsNumericUpDown.TabIndex = 1;
+            this.RequestsNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label1
             // 
@@ -226,6 +246,11 @@
             // MaxFrameValNumericUpDown
             // 
             this.MaxFrameValNumericUpDown.Location = new System.Drawing.Point(336, 11);
+            this.MaxFrameValNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.MaxFrameValNumericUpDown.Minimum = new decimal(new int[] {
             1,
             0,
