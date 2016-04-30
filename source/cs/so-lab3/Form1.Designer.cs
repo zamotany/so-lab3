@@ -258,7 +258,7 @@
             0});
             this.MaxFrameValNumericUpDown.Name = "MaxFrameValNumericUpDown";
             this.MaxFrameValNumericUpDown.Size = new System.Drawing.Size(87, 20);
-            this.MaxFrameValNumericUpDown.TabIndex = 12;
+            this.MaxFrameValNumericUpDown.TabIndex = 3;
             this.MaxFrameValNumericUpDown.Value = new decimal(new int[] {
             1,
             0,
