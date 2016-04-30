@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="Frame.cs" />
     <Compile Include="LRUAlgorithm.cs" />
+    <Compile Include="OPTAlgorithm.cs" />
     <Compile Include="PhysicalMemory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

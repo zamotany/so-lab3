@@ -14,6 +14,7 @@ namespace solab3
     {
         private List<int> m_Requests;
         private FIFOAlgorithm m_FIFO;
+        private OPTAlgorithm m_OPT;
         private LRUAlgorithm m_LRU;
         private A_LRUAlgorithm m_ALRU;
         private RANDAlgorithm m_RAND;
@@ -46,6 +47,7 @@ namespace solab3
         {
             m_Requests = new List<int>((int)RequestsNumericUpDown.Value);
             m_FIFO = new FIFOAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
+            m_OPT = new OPTAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
             m_LRU = new LRUAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
             m_ALRU = new A_LRUAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
             m_RAND = new RANDAlgorithm(m_Requests, (int)frameNumericUpDown.Value);
@@ -65,6 +67,7 @@ namespace solab3
             for (int i = 0; i < (int)frameNumericUpDown.Value; i++)
             {
                 m_FIFO[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
+                m_OPT[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
                 m_LRU[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
                 m_ALRU[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
                 m_RAND[i].Value = m_Requests[i >= (int)RequestsNumericUpDown.Value ? 0 : i];
@@ -77,15 +80,19 @@ namespace solab3
             for (int i = 0; i < m_Requests.Count; /*End condition handled by removing item at position i.*/)
             {
                 m_FIFO.HandleRequest(m_Requests[i]);
+                m_OPT.HandleRequest(m_Requests[i]);
                 m_LRU.HandleRequest(m_Requests[i]);
                 m_ALRU.HandleRequest(m_Requests[i]);
                 m_RAND.HandleRequest(m_Requests[i]);
                 m_Requests.RemoveAt(i);
                 FIFO_PagesErrors.Text = m_FIFO.PagesErrors.ToString();
+                OPT_PagesErrors.Text = m_OPT.PagesErrors.ToString();
                 LRU_PagesErrors.Text = m_LRU.PagesErrors.ToString();
                 ALRU_PagesErrors.Text = m_ALRU.PagesErrors.ToString();
                 RAND_PagesErrors.Text = m_ALRU.PagesErrors.ToString();
-                console.Text += m_FIFO.ToString() + "\t" + m_LRU.ToString() + "\t" + m_ALRU.ToString() + "\t" + m_RAND.ToString() + "\r\n";
+                console.Text += m_FIFO.ToString() + "\t" + m_OPT.ToString()
+                    + "\t" + m_LRU.ToString() + "\t" + m_ALRU.ToString() + "\t"
+                    + m_RAND.ToString() + "\r\n";
             }
             
         }
