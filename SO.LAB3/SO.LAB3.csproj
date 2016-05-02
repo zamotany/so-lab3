@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataItem.cs" />
     <Compile Include="RANDAlgorithm.cs" />
     <Compile Include="ReplaceAlgorithm.cs" />
     <Page Include="MainWindow.xaml">

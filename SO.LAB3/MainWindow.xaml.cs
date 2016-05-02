@@ -26,6 +26,7 @@ namespace SO.LAB3
         private LRUAlgorithm m_LRU;
         private A_LRUAlgorithm m_ALRU;
         private RANDAlgorithm m_RAND;
+        private List<DataItem> m_Data;
 
         public MainWindow()
         {
@@ -33,11 +34,15 @@ namespace SO.LAB3
             FramesTextBox.Text = "4";
             RequestsTextBox.Text = "8";
             MaxValueTextBox.Text = "8";
+            m_Data = new List<DataItem>();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             button.IsEnabled = false;
+            m_Data.Clear();
+            DataGrid.ItemsSource = null;
+            DataGrid.ItemsSource = m_Data;
 
             m_Requests = new List<int>(int.Parse(RequestsTextBox.Text));
             m_FIFO = new FIFOAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
@@ -64,6 +69,15 @@ namespace SO.LAB3
                 m_RAND[i].Value = m_Requests[i >= int.Parse(RequestsTextBox.Text) ? 0 : i];
             }
 
+            DataItem item = new DataItem(-1);
+            item.FIFO = m_FIFO.ToString();
+            item.OPT = m_OPT.ToString();
+            item.LRU = m_LRU.ToString();
+            item.ALRU = m_ALRU.ToString();
+            item.RAND = m_RAND.ToString();
+            m_Data.Add(item);
+            DataGrid.Items.Refresh();
+
             for (int i = 0; i < m_Requests.Count; m_Requests.RemoveAt(i))
             {
                 m_FIFO.HandleRequest(m_Requests[i]);
@@ -71,15 +85,22 @@ namespace SO.LAB3
                 m_LRU.HandleRequest(m_Requests[i]);
                 m_ALRU.HandleRequest(m_Requests[i]);
                 m_RAND.HandleRequest(m_Requests[i]);
-                FIFOLabel.Content = m_FIFO.PagesErrors.ToString();
-                OPTLabel.Content = m_OPT.PagesErrors.ToString();
-                LRULabel.Content = m_LRU.PagesErrors.ToString();
-                ALRULabel.Content = m_ALRU.PagesErrors.ToString();
-                RANDLabel.Content = m_ALRU.PagesErrors.ToString();
-                /*console.Text += m_FIFO.ToString() + "\t" + m_OPT.ToString()
-                    + "\t" + m_LRU.ToString() + "\t" + m_ALRU.ToString() + "\t"
-                    + m_RAND.ToString() + "\r\n";*/
+
+                item = new DataItem(m_Requests[i]);
+                item.FIFO = m_FIFO.ToString();
+                item.OPT = m_OPT.ToString();
+                item.LRU = m_LRU.ToString();
+                item.ALRU = m_ALRU.ToString();
+                item.RAND = m_RAND.ToString();
+                m_Data.Add(item);
+                DataGrid.Items.Refresh();
             }
+
+            FIFOLabel.Content = m_FIFO.PagesErrors.ToString();
+            OPTLabel.Content = m_OPT.PagesErrors.ToString();
+            LRULabel.Content = m_LRU.PagesErrors.ToString();
+            ALRULabel.Content = m_ALRU.PagesErrors.ToString();
+            RANDLabel.Content = m_ALRU.PagesErrors.ToString();
 
             button.IsEnabled = true;
         }
