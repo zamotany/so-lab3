@@ -29,7 +29,7 @@ namespace SO.LAB3
 
         public override string ToString()
         {
-            string output = "FIFO: ";
+            string output = "";
             for (int k = 0; k < m_Frames.Size; k++)
                 output  += m_Frames[k].Value.ToString() + ' ';
             return output;
