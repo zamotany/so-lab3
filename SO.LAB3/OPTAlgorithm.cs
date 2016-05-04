@@ -14,6 +14,12 @@ namespace SO.LAB3
 
         public override void HandleRequest(int value)
         {
+            if (!m_FinishedInit)
+            {
+                InitFrame(value);
+                return;
+            }
+
             for (int i = 0; i < m_Frames.Size; ++i)
             {
                 if (m_Frames[i].Value == value)
