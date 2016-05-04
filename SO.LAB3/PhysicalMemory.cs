@@ -14,7 +14,7 @@ namespace SO.LAB3
         {
             m_Frames = new List<Frame>(frames);
             for (int i = 0; i < frames; i++)
-                m_Frames.Add(new Frame(-1));
+                m_Frames.Add(new Frame());
         }
 
         public int Size
