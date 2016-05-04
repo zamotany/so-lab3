@@ -28,6 +28,8 @@ namespace SO.LAB3
         private RANDAlgorithm m_RAND;
         private List<DataItem> m_Data;
 
+        private static bool m_CustomRequests = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -44,30 +46,26 @@ namespace SO.LAB3
             DataGrid.ItemsSource = null;
             DataGrid.ItemsSource = m_Data;
 
-            m_Requests = new List<int>(int.Parse(RequestsTextBox.Text));
+            if (m_CustomRequests)
+                HandleCustomRequests();
+            else
+            {
+                m_Requests = new List<int>(int.Parse(RequestsTextBox.Text));
+
+                Random rand = new Random(Guid.NewGuid().GetHashCode());
+                int temp = 0;
+                for (int i = 0; i < m_Requests.Capacity; i++)
+                {
+                    temp = rand.Next(1, int.Parse(MaxValueTextBox.Text));
+                    m_Requests.Add(temp);
+                }
+            }
+
             m_FIFO = new FIFOAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
             m_OPT = new OPTAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
             m_LRU = new LRUAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
             m_ALRU = new A_LRUAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
             m_RAND = new RANDAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
-
-            Random rand = new Random(Guid.NewGuid().GetHashCode());
-
-            int temp = 0;
-            for (int i = 0; i < m_Requests.Capacity; i++)
-            {
-                temp = rand.Next(1, int.Parse(MaxValueTextBox.Text));
-                m_Requests.Add(temp);
-            }
-
-            for (int i = 0; i < int.Parse(FramesTextBox.Text); i++)
-            {
-                m_FIFO[i].Value = m_Requests[i >= int.Parse(RequestsTextBox.Text) ? 0 : i];
-                m_OPT[i].Value = m_Requests[i >= int.Parse(RequestsTextBox.Text) ? 0 : i];
-                m_LRU[i].Value = m_Requests[i >= int.Parse(RequestsTextBox.Text) ? 0 : i];
-                m_ALRU[i].Value = m_Requests[i >= int.Parse(RequestsTextBox.Text) ? 0 : i];
-                m_RAND[i].Value = m_Requests[i >= int.Parse(RequestsTextBox.Text) ? 0 : i];
-            }
 
             DataItem item = new DataItem(-1);
             item.FIFO = m_FIFO.ToString();
@@ -105,25 +103,60 @@ namespace SO.LAB3
             button.IsEnabled = true;
         }
 
-        public static bool isNumeric(string text)
+        private void HandleCustomRequests()
+        {
+            string[] requests = RequestsTextBox.Text.Split(new char[] { ' ' });
+            m_Requests = new List<int>(requests.Length);
+            foreach (string r in requests)
+            {
+                if(!r.Equals(""))
+                    m_Requests.Add(int.Parse(r));
+            }
+        }
+
+        public static bool IsNumeric(string text)
         {
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9.-]+");
-            return !regex.IsMatch(text);
+            return regex.IsMatch(text);
+        }
+
+        public static bool IsRequestsStringValid(string text)
+        {
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^ 0123456789.-]+");
+            return regex.IsMatch(text);
         }
 
         private void FramesTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !isNumeric(e.Text);
+            e.Handled = IsNumeric(e.Text);
         }
 
         private void RequestsTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !isNumeric(e.Text);
+            if (m_CustomRequests)
+            {
+                e.Handled = IsRequestsStringValid(e.Text);
+            }
+            else
+                e.Handled = IsNumeric(e.Text);
         }
 
         private void MaxValueTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !isNumeric(e.Text);
+            e.Handled = IsNumeric(e.Text);
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+            MaxValueTextBox.IsEnabled = false;
+            m_CustomRequests = true;
+        }
+
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            RequestsTextBox.Text = null;
+            m_CustomRequests = false;
+            MaxValueTextBox.IsEnabled = true;
         }
     }
 }

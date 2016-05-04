@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SO.LAB3"
         mc:Ignorable="d"
-         Title="SO Lab 3" Height="350" Width="681" ResizeMode="CanMinimize">
+         Title="SO Lab 3" Height="350" Width="757" ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="214*"/>
-            <ColumnDefinition Width="461*"/>
+            <ColumnDefinition Width="286*"/>
+            <ColumnDefinition Width="465*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="label" Content="Frames" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
         <Label x:Name="label_Copy" Content="Requests" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Height="26" Width="57"/>
         <Label x:Name="label_Copy1" Content="Max value" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Height="26" Width="64"/>
         <TextBox x:Name="FramesTextBox" HorizontalAlignment="Left" Height="23" Margin="87,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="0" PreviewTextInput="FramesTextBox_PreviewTextInput"/>
-        <TextBox x:Name="RequestsTextBox" HorizontalAlignment="Left" Height="23" Margin="87,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" PreviewTextInput="RequestsTextBox_PreviewTextInput"/>
+        <TextBox x:Name="RequestsTextBox" HorizontalAlignment="Left" Height="23" Margin="87,39,0,0" VerticalAlignment="Top" Width="120" TabIndex="1" PreviewTextInput="RequestsTextBox_PreviewTextInput"/>
         <TextBox x:Name="MaxValueTextBox" HorizontalAlignment="Left" Height="23" Margin="87,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="2" PreviewTextInput="MaxValueTextBox_PreviewTextInput"/>
         <Label x:Name="label1" Content="FIFO" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Height="26" Width="34"/>
         <Label x:Name="label2" Content="OPT" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Height="26" Width="32"/>
@@ -28,7 +28,8 @@
         <Label x:Name="ALRULabel" Content="0" HorizontalAlignment="Left" Margin="87,190,0,0" VerticalAlignment="Top" Height="26" Width="117"/>
         <Label x:Name="RANDLabel" Content="0" HorizontalAlignment="Left" Margin="87,216,0,0" VerticalAlignment="Top" Height="26" Width="117"/>
         <Button x:Name="button" Content="Go" HorizontalAlignment="Left" Margin="132,279,0,0" VerticalAlignment="Top" Width="75" TabIndex="3" Click="button_Click" Height="20"/>
-        <DataGrid x:Name="DataGrid" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="289" Width="441"/>
+        <DataGrid x:Name="DataGrid" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="289" Width="451"/>
+        <CheckBox x:Name="checkBox" Content="Custom" HorizontalAlignment="Left" Margin="212,42,0,0" VerticalAlignment="Top" Width="64" Height="15" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
 
     </Grid>
 </Window>
