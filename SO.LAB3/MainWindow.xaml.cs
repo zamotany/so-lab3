@@ -52,9 +52,10 @@ namespace SO.LAB3
             {
                 m_Requests = new List<int>();
                 RequestsGenerator gen = new RequestsGenerator(
-                    /*1,
-                    int.Parse(MaxValueTextBox.Text),*/
-                    int.Parse(RequestsTextBox.Text));
+                    int.Parse(RequestsTextBox.Text),
+                    1,
+                    int.Parse(MaxValueTextBox.Text)
+                    );
                 m_Requests.AddRange(gen.Requests);
             }
 

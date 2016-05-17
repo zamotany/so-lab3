@@ -48,10 +48,11 @@ namespace SO.LAB3
             }
         }
 
-        public RequestsGenerator(int size)
+        public RequestsGenerator(int size, int min, int max)
         {
             m_Requests = new int[size];
-            Generate(4, 2, 6, 1);
+            //Generate(4, 2, 6, 1);
+            Generate2(min, max);
         }
 
         public int[] Requests
@@ -59,6 +60,29 @@ namespace SO.LAB3
             get
             {
                 return m_Requests;
+            }
+        }
+
+        private void Generate2(int min, int max)
+        {
+            Random rand = new Random();
+            int seed = rand.Next(min, max + 1);
+            int r = rand.Next(2, (int)(.1 * m_Requests.Length));
+            int t = rand.Next(1, r);
+            for(int i = 0, k = 0; i < m_Requests.Length; i++, k++)
+            {
+                if (k < r)
+                {
+                    m_Requests[i] = rand.Next(Math.Max(0, seed - t), Math.Min(max + 1, seed + t + 1));
+                }
+                else
+                {
+                    k = -1;
+                    r = rand.Next(2, (int)(.1 * m_Requests.Length));
+                    t = rand.Next(1, r);
+                    seed = rand.Next(min, max + 1);
+                    m_Requests[i] = seed;
+                }
             }
         }
 
@@ -80,9 +104,13 @@ namespace SO.LAB3
 
             for (int i = 0; i < m_Processes.Length; i++)
             {
+                int index = rand.Next(0, reqs.Count);
                 for (int k = 0; k < m_Processes[i].Size; k++)
                 {
-                    int index = rand.Next(0, reqs.Count);
+                    if (k > 0)
+                    {
+                        index = rand.Next(Math.Max(0, index - 2), Math.Min(reqs.Count - 1, index + 2));
+                    }
                     m_Processes[i].Requests[k] = reqs[index];
                     reqs.RemoveAt(index);
                 }
