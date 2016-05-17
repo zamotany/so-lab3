@@ -34,8 +34,8 @@ namespace SO.LAB3
         {
             InitializeComponent();
             FramesTextBox.Text = "4";
-            RequestsTextBox.Text = "8";
-            MaxValueTextBox.Text = "8";
+            RequestsTextBox.Text = "26";
+            MaxValueTextBox.Text = "10";
             m_Data = new List<DataItem>();
         }
 
@@ -50,15 +50,12 @@ namespace SO.LAB3
                 HandleCustomRequests();
             else
             {
-                m_Requests = new List<int>(int.Parse(RequestsTextBox.Text));
-
-                Random rand = new Random(Guid.NewGuid().GetHashCode());
-                int temp = 0;
-                for (int i = 0; i < m_Requests.Capacity; i++)
-                {
-                    temp = rand.Next(1, int.Parse(MaxValueTextBox.Text));
-                    m_Requests.Add(temp);
-                }
+                m_Requests = new List<int>();
+                RequestsGenerator gen = new RequestsGenerator(
+                    /*1,
+                    int.Parse(MaxValueTextBox.Text),*/
+                    int.Parse(RequestsTextBox.Text));
+                m_Requests.AddRange(gen.Requests);
             }
 
             m_FIFO = new FIFOAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
