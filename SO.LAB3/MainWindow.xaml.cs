@@ -34,8 +34,8 @@ namespace SO.LAB3
         {
             InitializeComponent();
             FramesTextBox.Text = "4";
-            RequestsTextBox.Text = "8";
-            MaxValueTextBox.Text = "8";
+            RequestsTextBox.Text = "26";
+            MaxValueTextBox.Text = "10";
             m_Data = new List<DataItem>();
         }
 
@@ -50,15 +50,13 @@ namespace SO.LAB3
                 HandleCustomRequests();
             else
             {
-                m_Requests = new List<int>(int.Parse(RequestsTextBox.Text));
-
-                Random rand = new Random(Guid.NewGuid().GetHashCode());
-                int temp = 0;
-                for (int i = 0; i < m_Requests.Capacity; i++)
-                {
-                    temp = rand.Next(1, int.Parse(MaxValueTextBox.Text));
-                    m_Requests.Add(temp);
-                }
+                m_Requests = new List<int>();
+                RequestsGenerator gen = new RequestsGenerator(
+                    int.Parse(RequestsTextBox.Text),
+                    1,
+                    int.Parse(MaxValueTextBox.Text)
+                    );
+                m_Requests.AddRange(gen.Requests);
             }
 
             m_FIFO = new FIFOAlgorithm(m_Requests, int.Parse(FramesTextBox.Text));
@@ -157,6 +155,37 @@ namespace SO.LAB3
             RequestsTextBox.Text = null;
             m_CustomRequests = false;
             MaxValueTextBox.IsEnabled = true;
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            button1.IsEnabled = false;
+
+            int fifoPageErrors = 0;
+            int optPageErrors = 0;
+            int lruPageErrors = 0;
+            int alruPageErrors = 0;
+            int randPageErrors = 0;
+
+            for (int i = 0; i < 20; i++)
+            {
+                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+                fifoPageErrors += m_FIFO.PagesErrors;
+                optPageErrors += m_OPT.PagesErrors;
+                lruPageErrors += m_LRU.PagesErrors;
+                alruPageErrors += m_ALRU.PagesErrors;
+                randPageErrors += m_RAND.PagesErrors;
+            }
+
+            string output = "FIFO: " + ((float)fifoPageErrors / 20.0).ToString() + "\n";
+            output += "OPT: " + ((float)optPageErrors / 20.0).ToString() + "\n";
+            output += "LRU: " + ((float)lruPageErrors / 20.0).ToString() + "\n";
+            output += "A-LRU: " + ((float)alruPageErrors / 20.0).ToString() + "\n";
+            output += "RAND: " + ((float)randPageErrors / 20.0).ToString();
+
+            MessageBox.Show(output);
+            button1.IsEnabled = true;
         }
     }
 }
