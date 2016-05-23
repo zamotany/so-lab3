@@ -4,20 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace solab3
+namespace SO.LAB3
 {
-    class FIFOAlgorithm : ReplaceAlgorimthm
+    class LRUAlgorithm : ReplaceAlgorimthm
     {
-        public FIFOAlgorithm(List<int> reqs, int frames) : base(reqs, frames)
+        public LRUAlgorithm(List<int> reqs, int frames) : base(reqs, frames)
         {
 
         }
 
         public override void HandleRequest(int value)
         {
+            if (!m_FinishedInit)
+            {
+                InitFrame(value);
+                return;
+            }
+
             for (int i = 0; i < m_Frames.Size; ++i)
                 if (m_Frames[i].Value == value)
+                {
+                    Frame temp = m_Frames[i];
+                    for (int j = i; j < m_Frames.Size - 1; ++j)
+                        m_Frames[j] = m_Frames[j + 1];
+
+                    m_Frames[m_Frames.Size - 1] = temp;
                     return;
+                }
 
             for (int i = 0; i < m_Frames.Size - 1; ++i)
                 m_Frames[i] = m_Frames[i + 1];
@@ -29,9 +42,9 @@ namespace solab3
 
         public override string ToString()
         {
-            string output = "FIFO: ";
+            string output = "";
             for (int k = 0; k < m_Frames.Size; k++)
-                output  += m_Frames[k].Value.ToString() + ' ';
+                output += m_Frames[k].Value.ToString() + ' ';
             return output;
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace solab3
+namespace SO.LAB3
 {
     class PhysicalMemory
     {
@@ -14,7 +14,7 @@ namespace solab3
         {
             m_Frames = new List<Frame>(frames);
             for (int i = 0; i < frames; i++)
-                m_Frames.Add(new Frame(-1));
+                m_Frames.Add(new Frame());
         }
 
         public int Size

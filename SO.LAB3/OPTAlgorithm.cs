@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace solab3
+namespace SO.LAB3
 {
     class OPTAlgorithm : ReplaceAlgorimthm
     {
@@ -14,6 +14,12 @@ namespace solab3
 
         public override void HandleRequest(int value)
         {
+            if (!m_FinishedInit)
+            {
+                InitFrame(value);
+                return;
+            }
+
             for (int i = 0; i < m_Frames.Size; ++i)
             {
                 if (m_Frames[i].Value == value)
@@ -49,7 +55,7 @@ namespace solab3
         }
         public override string ToString()
         {
-            string output = "OPT: ";
+            string output = "";
             for (int k = 0; k < m_Frames.Size; k++)
                 output += m_Frames[k].Value.ToString() + ' ';
             return output;
