@@ -51,8 +51,7 @@ namespace SO.LAB3
         public RequestsGenerator(int size, int min, int max)
         {
             m_Requests = new int[size];
-            //Generate(4, 2, 6, 1);
-            Generate2(min, max);
+            Generate(min, max);
         }
 
         public int[] Requests
@@ -63,7 +62,7 @@ namespace SO.LAB3
             }
         }
 
-        private void Generate2(int min, int max)
+        private void Generate(int min, int max)
         {
             Random rand = new Random();
             int seed = rand.Next(min, max + 1);
@@ -86,7 +85,7 @@ namespace SO.LAB3
             }
         }
 
-        private void Generate(int processes, int reqMin, int reqMax, int valMin)
+        private void Generate2(int processes, int reqMin, int reqMax, int valMin)
         {
             m_Processes = new Process[processes];
             Random rand = new Random();
