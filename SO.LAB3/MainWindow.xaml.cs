@@ -156,5 +156,36 @@ namespace SO.LAB3
             m_CustomRequests = false;
             MaxValueTextBox.IsEnabled = true;
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            button1.IsEnabled = false;
+
+            int fifoPageErrors = 0;
+            int optPageErrors = 0;
+            int lruPageErrors = 0;
+            int alruPageErrors = 0;
+            int randPageErrors = 0;
+
+            for (int i = 0; i < 20; i++)
+            {
+                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+                fifoPageErrors += m_FIFO.PagesErrors;
+                optPageErrors += m_OPT.PagesErrors;
+                lruPageErrors += m_LRU.PagesErrors;
+                alruPageErrors += m_ALRU.PagesErrors;
+                randPageErrors += m_RAND.PagesErrors;
+            }
+
+            string output = "FIFO: " + ((float)fifoPageErrors / 20.0).ToString() + "\n";
+            output += "OPT: " + ((float)optPageErrors / 20.0).ToString() + "\n";
+            output += "LRU: " + ((float)lruPageErrors / 20.0).ToString() + "\n";
+            output += "A-LRU: " + ((float)alruPageErrors / 20.0).ToString() + "\n";
+            output += "RAND: " + ((float)randPageErrors / 20.0).ToString();
+
+            MessageBox.Show(output);
+            button1.IsEnabled = true;
+        }
     }
 }

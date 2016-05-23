@@ -84,39 +84,5 @@ namespace SO.LAB3
                 }
             }
         }
-
-        private void Generate2(int processes, int reqMin, int reqMax, int valMin)
-        {
-            m_Processes = new Process[processes];
-            Random rand = new Random();
-
-            int totalRequests = 0;
-            for (int i = 0; i < m_Processes.Length; i++)
-            {
-                m_Processes[i] = new Process(rand.Next(reqMin, reqMax + 1));
-                totalRequests += m_Processes[i].Size;
-            }
-
-            List<int> reqs = new List<int>(totalRequests);
-            for (int i = 0; i < reqs.Capacity; i++)
-                reqs.Add(valMin + i);
-
-            for (int i = 0; i < m_Processes.Length; i++)
-            {
-                int index = rand.Next(0, reqs.Count);
-                for (int k = 0; k < m_Processes[i].Size; k++)
-                {
-                    if (k > 0)
-                    {
-                        index = rand.Next(Math.Max(0, index - 2), Math.Min(reqs.Count - 1, index + 2));
-                    }
-                    m_Processes[i].Requests[k] = reqs[index];
-                    reqs.RemoveAt(index);
-                }
-            }
-
-            for (int i = 0; i < m_Requests.Length; i++)
-                m_Requests[i] = m_Processes[i % m_Processes.Length].Next;
-        }
     }
 }
