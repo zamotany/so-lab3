@@ -114,13 +114,13 @@ namespace SO.LAB3
 
         public static bool IsNumeric(string text)
         {
-            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9.-]+");
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9]+");
             return regex.IsMatch(text);
         }
 
         public static bool IsRequestsStringValid(string text)
         {
-            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^ 0123456789.-]+");
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^ 0123456789]+");
             return regex.IsMatch(text);
         }
 
@@ -157,35 +157,57 @@ namespace SO.LAB3
             MaxValueTextBox.IsEnabled = true;
         }
 
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            button1.IsEnabled = false;
-
-            int fifoPageErrors = 0;
-            int optPageErrors = 0;
-            int lruPageErrors = 0;
-            int alruPageErrors = 0;
-            int randPageErrors = 0;
-
-            for (int i = 0; i < 20; i++)
+            int count;
+            if (int.TryParse(simulateCount.Text, out count) && count > 0)
             {
-                button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                IsEnabled = false;
+                var handler =  new System.ComponentModel.CancelEventHandler(MainWindow_Closing);
+                Closing += handler;
 
-                fifoPageErrors += m_FIFO.PagesErrors;
-                optPageErrors += m_OPT.PagesErrors;
-                lruPageErrors += m_LRU.PagesErrors;
-                alruPageErrors += m_ALRU.PagesErrors;
-                randPageErrors += m_RAND.PagesErrors;
+                int fifoPageErrors = 0;
+                int optPageErrors = 0;
+                int lruPageErrors = 0;
+                int alruPageErrors = 0;
+                int randPageErrors = 0;
+
+                for (int i = 0; i < count; i++)
+                {
+                    button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+
+                    fifoPageErrors += m_FIFO.PagesErrors;
+                    optPageErrors += m_OPT.PagesErrors;
+                    lruPageErrors += m_LRU.PagesErrors;
+                    alruPageErrors += m_ALRU.PagesErrors;
+                    randPageErrors += m_RAND.PagesErrors;
+                }
+
+                Window resultsWindow = new SimulationResults(
+                    count, fifoPageErrors, optPageErrors,
+                    lruPageErrors, alruPageErrors, randPageErrors);
+                resultsWindow.Show();
+                resultsWindow.Closed += delegate
+                {
+                    IsEnabled = true;
+                    Closing -= handler;
+                };
             }
+            else
+            {
+                MessageBox.Show("Ilość symulacji nie jest poprawną liczbą.", "Błąd", MessageBoxButton.OK);
+                simulateCount.Text = 1.ToString();
+            }
+        }
 
-            string output = "FIFO: " + ((float)fifoPageErrors / 20.0).ToString() + "\n";
-            output += "OPT: " + ((float)optPageErrors / 20.0).ToString() + "\n";
-            output += "LRU: " + ((float)lruPageErrors / 20.0).ToString() + "\n";
-            output += "A-LRU: " + ((float)alruPageErrors / 20.0).ToString() + "\n";
-            output += "RAND: " + ((float)randPageErrors / 20.0).ToString();
-
-            MessageBox.Show(output);
-            button1.IsEnabled = true;
+        private void simulateCount_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = IsNumeric(e.Text);
         }
     }
 }

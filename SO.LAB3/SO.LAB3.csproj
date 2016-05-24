@@ -59,6 +59,9 @@
     <Compile Include="RANDAlgorithm.cs" />
     <Compile Include="ReplaceAlgorithm.cs" />
     <Compile Include="RequestsGenerator.cs" />
+    <Compile Include="SimulationResults.xaml.cs">
+      <DependentUpon>SimulationResults.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +78,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SimulationResults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OPTAlgorithm.cs" />
